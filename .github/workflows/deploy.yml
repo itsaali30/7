@@ -3,10 +3,13 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Trigger on push to main branch
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,14 +23,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          gem install jekyll
+          gem install bundler
           bundle install
 
-      - name: Build Jekyll site
-        run: jekyll build
+      - name: Build the site
+        run: |
+          bundle exec jekyll build
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: _site
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: './_site'

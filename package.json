@@ -1,4 +1,11 @@
 {
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cor": "^0.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "ws": "^8.18.0"
+  },
   "name": "7",
   "version": "1.0.0",
   "main": "index.js",
@@ -8,15 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "axios": "^1.7.7",
-    "cor": "^0.0.0",
-    "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "ws": "^8.18.0"
-  },
-  "devDependencies": {
-    "jekyll": "^3.0.0-beta1"
-  }
+  "devDependencies": {},
+  "description": ""
 }
