@@ -1,33 +1,31 @@
-// server.js
 const express = require('express');
 const http = require('http');
-const { Server } = require('socket.io');
+const socketIo = require('socket.io');
+const axios = require('axios');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = socketIo(server);
 
-// Serve a simple homepage
-app.get('/', (req, res) => {
-  res.send('Socket.IO server is running');
-});
+const AIRTABLE_URL = 'https://api.airtable.com/v0/appUycLZwpqXOVZsQ/Youtube';
+const AIRTABLE_CONFIG = { headers: { Authorization: 'Bearer patX200VGkvIdjhvl.85e8e525a33b49ef814bfbfc0c0af14631faf88b39fd566a99a5c3de203a181a' } };
 
-// Handle Socket.IO connections
 io.on('connection', (socket) => {
-  console.log('A user connected:', socket.id);
-
-  socket.on('message', (data) => {
-    console.log('Message received:', data);
-    io.emit('message', data); // Broadcast message to all connected clients
-  });
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
+  console.log('a user connected');
+  socket.on('fetchData', async () => {
+    try {
+      const response = await axios.get(AIRTABLE_URL, AIRTABLE_CONFIG);
+      socket.emit('data', response.data);
+    } catch (error) {
+      console.error(error);
+    }
   });
 });
 
-// Start the server on Render’s dynamic port
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.get('/', (req, res) => {
+  res.send('Socket.IO Server is running');
+});
+
+server.listen(3000, () => {
+  console.log('Server is listening on port 3000');
 });
