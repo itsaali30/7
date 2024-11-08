@@ -8,7 +8,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,7 +18,7 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: node server.js
+        run: npm install
 
       - name: Run Tests
         run: echo "Add test commands here"
