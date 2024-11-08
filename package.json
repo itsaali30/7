@@ -1,10 +1,20 @@
 {
-  "name": "my-jekyll-site",
+  "name": "project-7",
   "version": "1.0.0",
-  "scripts": {
-    "build": "jekyll build"
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^1.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "socket.io": "^4.5.4"
+    
   },
-  "devDependencies": {
+  "scripts": {
+   
+    "start": "node server.js",
+    "build": "jekyll build" 
+  },
+"devDependencies": {
     "jekyll": "^4.2.0"
   }
 }
