@@ -14,4 +14,14 @@
  , "build": "echo 'Nothing to build for Express'"
  
   }
+},
+{
+  "name": "my-jekyll-site",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "jekyll build"
+  },
+  "devDependencies": {
+    "jekyll": "^4.2.0"
+  }
 }
