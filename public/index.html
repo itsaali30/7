@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO Client</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Real-Time Airtable Data</h1>
+  <button onclick="fetchData()">Get Data</button>
+  <pre id="data"></pre>
+
+  <script>
+    const socket = io();
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+
+    socket.on('data', (data) => {
+      document.getElementById('data').textContent = JSON.stringify(data, null, 2);
+    });
+
+    function fetchData() {
+      socket.emit('getData');
+    }
+  </script>
+</body>
+</html>
