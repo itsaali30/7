@@ -9,25 +9,37 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      # Step 2: Set up Ruby environment
+      - name: Set up Ruby for Jekyll
+        uses: actions/setup-ruby@v1
         with:
-          node-version: '16'
+          ruby-version: '3.x'
 
-      - name: Install dependencies
+      # Step 3: Install Bundler and Jekyll
+      - name: Install Ruby dependencies
+        run: |
+          gem install bundler  # Install Bundler
+          bundle install       # Install Jekyll and other dependencies from Gemfile
+
+      # Step 4: Build Jekyll site
+      - name: Build Jekyll site
+        run: bundle exec jekyll build  # Build the site
+
+      # Step 5: Install dependencies for Express app
+      - name: Install dependencies for Express app
         run: npm install
 
-      - name: Run server
+      # Step 6: Run Express server (optional, if you need to start Express in the workflow)
+      - name: Run Express server
         run: npm start &
 
-      - name: Build Jekyll site
-        run: bundle exec jekyll build
-
+      # Step 7: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          publish_dir: ./_site  # Directory where the Jekyll build output is stored
