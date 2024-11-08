@@ -20,10 +20,10 @@ jobs:
           ruby-version: '3.x'
 
       # Step 3: Install Bundler and Jekyll
-      - name: Install Ruby dependencies
+      - name: Install Bundler and Jekyll dependencies
         run: |
           gem install bundler  # Install Bundler
-          bundle install       # Install Jekyll and other dependencies from Gemfile
+          bundle install       # Install dependencies from Gemfile
 
       # Step 4: Build Jekyll site
       - name: Build Jekyll site
@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies for Express app
         run: npm install
 
-      # Step 6: Run Express server (optional, if you need to start Express in the workflow)
+      # Step 6: Run Express server (optional, if needed)
       - name: Run Express server
         run: npm start &
 
