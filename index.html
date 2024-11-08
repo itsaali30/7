@@ -2,28 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Socket.IO Client</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 15</title>
   <script src="/socket.io/socket.io.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const socket = io();
+
+      socket.on('data', (data) => {
+        console.log(data);
+      });
+
+      socket.emit('fetchData');
+    });
+  </script>
 </head>
 <body>
-  <h1>Real-Time Airtable Data</h1>
-  <button onclick="fetchData()">Get Data</button>
-  <pre id="data"></pre>
-
-  <script>
-    const socket = io();
-
-    socket.on('connect', () => {
-      console.log('Connected to server');
-    });
-
-    socket.on('data', (data) => {
-      document.getElementById('data').textContent = JSON.stringify(data, null, 2);
-    });
-
-    function fetchData() {
-      socket.emit('getData');
-    }
-  </script>
+  <h1>Project 15</h1>
+  <p>Data from Airtable will appear in the console.</p>
 </body>
 </html>
