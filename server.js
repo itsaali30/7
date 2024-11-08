@@ -87,6 +87,8 @@ app.post('/webhook', (req, res) => {
 app.server = app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+const cors = require('cors');
+app.use(cors({ origin: 'https://itsaali30.github.io' }));
 
 // Upgrade HTTP server to support WebSockets
 app.server.on('upgrade', (request, socket, head) => {
